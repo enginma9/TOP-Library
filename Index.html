@@ -18,8 +18,8 @@
     </div>
     <div class="shelf-bottom"></div>
     <div id="shelf-div" class="shelf">
-        <div class="book green-book"> <span class="read-status unread">Unread</span> <span class="bookTitle">Tale of Two Cities</span> <span class="pages">400p</span> <span class="author">Charles Dickens</span></div>
-        <div class="book red-book"> <span class="read-status read">Read</span> <span class="bookTitle">The Lion, the Witch, and the Wardrobe</span> <span class="pages">195p</span> <span class="author">C.S. Lewis</span></div>
+        <div class="book white-book"> <span class="read-status unread">Unread</span> <span class="bookTitle">Welcome to the Library</span> <span class="pages">400p</span> <span class="author">Charles Dickens</span></div>
+        <div class="book black-book"> <span class="read-status read">Read</span> <span class="bookTitle">Please Wait While We Clean Up.</span> <span class="pages">195p</span> <span class="author">C.S. Lewis</span></div>
         <!-- <div id="new-book" class="book purple-book"> <span class="read-status read">Add</span> <span class="bookTitle">New Book</span> <span class="pages">?</span> <span class="author">Click Me</span></div>
          -->
     </div>
@@ -37,6 +37,15 @@
             </p><p>
                 <label for="input-author" placeholder="Jim Butcher" >Author</label>
                 <input id="input-author" type="text">
+            </p><p>
+                <label for="input-color"></label>
+                <select name="input-color" id="input-color" class="">
+                    <option value="purple">purple</option>
+                    <option value="red">red</option>
+                    <option value="green">green</option>
+                    <option value="white">white</option>
+                    <option value="black">black</option>
+                </select>
             </p><p>
                 <button id="add-button">Add</button>
                 <button id="cancel-button" autofocus>Cancel</button>
