@@ -1,0 +1,168 @@
+:root{
+    --spine-color: gold;
+    --book-width: 10vh;
+    --book-title-min-height: 50vh;
+
+}
+
+@media only screen and ( max-aspect-ratio: 2 / 3 ) {
+    :root{
+        --book-title-min-height: 20vh;
+    }
+}
+
+html, body{
+
+    height: 100%;
+}
+/* min vh, max vw */
+body{
+    background-image: linear-gradient(black, #333333);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vh;
+    font-weight: 700;
+    margin-top: 5vh;
+}
+.t{
+    background-image: linear-gradient(to right, rgb(186, 173, 97), gold, rgb(188, 178, 118) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+}
+
+.shelf{
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 3rem;
+}
+.shelf-bottom{
+    height: 5vh;
+    background-image: linear-gradient(to bottom, black, white, gray, black);
+    background-repeat: repeat;
+    background-position: center;
+    border-radius: 2vh;
+}
+.shelf::-webkit-scrollbar{
+/*    display: none; */
+}
+
+.book{
+    /*background-image: linear-gradient( to right, rgb(112, 0, 217),rgb(112, 0, 217),rgb(80, 0, 190));*/
+    width: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1vh;
+    border: 1px solid black;
+    border-radius: 1vh;
+    box-shadow: inset 0 0 2vh black;
+    transition: transform 750ms ease-in-out;
+}
+.book:hover{
+    transform: translateY(-1rem);
+}
+.red-book{
+    background-image: linear-gradient( to right, rgb(131, 53, 69),rgb(174, 47, 73),rgb(88, 21, 34));
+}
+.green-book{
+    background-image: linear-gradient(to right, rgb(2, 79, 2),green,rgb(17, 92, 17));
+}
+.purple-book{
+    background-image: linear-gradient( to right, rgb(112, 0, 217),rgb(112, 0, 217),rgb(80, 0, 190));
+}
+
+.bookTitle{
+    text-align: center;
+    writing-mode: sideways-rl;
+    text-orientation: sideways;
+    color:rgb(252, 214, 0);
+    font-size: 3vh;
+    padding: 2vh;
+    min-height: var(--book-title-min-height);
+}
+.pages{
+    background-color: transparent;
+    color:antiquewhite;
+    font-size: 1.5vh;
+    margin-bottom: 1vh;
+}
+#new-book > .pages{
+    font-size: 2vh;
+}
+.author{
+    color:antiquewhite;
+    font-size: 1.5vh;
+    text-align: center;
+}
+
+.read-status{
+    border-radius: 1vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    font-size: 1.5vh;
+}
+.read{
+    background-color: green;
+}
+.unread{
+    background-color: red;
+}
+
+a {
+    text-decoration: none;
+    color: turquoise;
+}
+a, a:hover, a:focus
+{
+    text-decoration: none;
+    color: inherit;
+    -webkit-transition: 300ms linear 0s;
+    -moz-transition: 300ms linear 0s;
+    -o-transition: 300ms linear 0s;
+    transition: 300ms linear 0s;
+    outline: 0 none;
+}
+a:hover, a:focus
+{
+    text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
+}
+
+#new-dialog{
+    border-radius: 5vh;
+    padding: 5vh;
+    background-image: linear-gradient(gray, rgb(168, 168, 168), gray, rgb(97, 96, 96));
+    box-shadow: inset 0 0 10vh black;
+    border: 1px solid rgba(255, 217, 0, 0.077);
+}
+form > p {
+    text-align: center;
+}
+input{
+    border:none;
+    border-radius: 1vh;
+}
+#hello-friend{
+    position: absolute;
+    background-image: linear-gradient( to bottom, rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0.5));
+    border-radius: 5vh;
+    padding: 5vh;
+    box-shadow: inset 0 0 10vh black;
+    border: 1px solid rgba(255, 217, 0, 0.077);
+    position: absolute;
+
+}

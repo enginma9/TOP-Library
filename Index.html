@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="title"> 
+        <span class="t">M</span>
+        <span class="t">y</span>
+        <span class="t">B</span>
+        <span class="t">o</span>
+        <span class="t">o</span>
+        <span class="t">k</span>
+        <span class="t">s</span>
+    </div>
+    <div class="shelf-bottom"></div>
+    <div class="shelf">
+        <div class="book green-book"> <span class="read-status unread">Unread</span> <span class="bookTitle">Tale of Two Cities</span> <span class="pages">400p</span> <span class="author">Charles Dickens</span></div>
+        <div class="book red-book"> <span class="read-status read">Read</span> <span class="bookTitle">The Lion, the Witch, and the Wardrobe</span> <span class="pages">195p</span> <span class="author">C.S. Lewis</span></div>
+        <div id="new-book" class="book purple-book"> <span class="read-status read">Add</span> <span class="bookTitle">New Book</span> <span class="pages">?</span> <span class="author">Click Me</span></div>
+        
+    </div>
+    <div class="shelf-bottom"></div>
+    <dialog id="new-dialog">
+        <form id="new-book-form">
+            <p>    
+                <label for="input-title">Title:</label>
+                <input type="text">
+            </p><p>
+                <label for="readCheckbox">Read?</label>
+                <input type="checkbox" name="readCheckBox" id="">
+                <label for="pagesInput">Pages:</label>
+                <input id="pagesInput" type="number" size="5" min="1" max="2000" onKeyDown="return false" name="pagesInput" >
+            </p><p>
+                <label for="input-author" placeholder="Jim Butcher" >Author</label>
+                <input type="text">
+            </p><p>
+                <button id="add-button">Add</button>
+                <button id="cancel-button" autofocus>Cancel</button>
+            </p>
+        </form>
+        
+    </dialog>
+    <dialog id="hello-friend" open>
+        <p>
+            Hello friend, 
+        </p>
+        <p>
+            This is just a bookshelf to keep track <br>
+            of books you've read.  
+        </p>
+        <p>
+            I've taken the liberty of adding a few books.
+        </p>
+        <button id="ok-friend">OK</button>
+    </dialog>
+    <script src="script.js"></script>
+</body>
+</html>
