@@ -7,7 +7,7 @@ Array.prototype.sortBy = function(p) {
 let myLibrary = [];
 const defaultData = [
     { read:false, title:"Tale of Two Cities", pages:448, author:"Charles Dickens", color: "green", link:"https://www.gutenberg.org/cache/epub/98/pg98-images.html" },
-    { read:false, title:"Farenheit 451", pages:249, author:"Ray Bradbury", color: "red" },
+    { read:false, title:"Farenheit 451", pages:249, author:"Ray Bradbury", color: "red", link:"https://www.thepublicdomain.org/2009/12/31/fahrenheit-451-book-burning-as-done-by-lawyers/" },
     { read:false, title:"Wizard's First Rule", pages:836, author:"Terry Goodkind", color: "black" },
     { read:false, title:"The Lion, the Witch, and the Wardrobe", pages:186, author:"C.S Lewis", color: "purple" },
     { read:false, title:"Prince Caspian", pages:216, author:"C.S Lewis", color: "green" },
