@@ -30,10 +30,10 @@
                 <label for="input-title">Title:</label>
                 <input id="input-title" type="text">
             </p><p>
-                <label for="readcheckbox">Read?</label>
+                <label for="read-checkbox">Read?</label>
                 <input id="read-checkbox" type="checkbox" name="readCheckBox">
                 <label for="input-pages">Pages:</label>
-                <input id="input-pages" type="number" size="5" min="1" max="2000" onKeyDown="return false" name="pagesInput" >
+                <input id="input-pages" type="number" size="5" min="1" max="2000" pattern=""  name="pagesInput" >
             </p><p>
                 <label for="input-author" placeholder="Jim Butcher" >Author</label>
                 <input id="input-author" type="text">
@@ -62,7 +62,8 @@
             of books you've read.  
         </p>
         <p>
-            I've taken the liberty of adding a few books.
+            I've taken the liberty of adding a few books.<br>
+            Click at the top of the book if you've already read it.  
         </p>
         <button id="ok-friend">OK</button>
     </dialog>

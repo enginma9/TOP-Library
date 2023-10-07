@@ -27,7 +27,7 @@ function Book( read, title, pages, author, color="purple", link="" ){
     this.series = "";
     this.seriesNumber = 1;
     this.link = link;
-    this.id = "Book ".concat((myLibrary.length + 1).toString());
+    this.id = "Book-".concat(( myLibrary.length + 1).toString() );
     console.log( this.id ," { ", this.read, ", ", this.title, ", ", this.pages, ", ", this.author, " } created. " );
 }
 
@@ -38,6 +38,11 @@ const okFriend = document.getElementById("ok-friend");
 const newDialog = document.getElementById("new-dialog");
 const addButton = document.getElementById("add-button");
 const cancelButton = document.getElementById("cancel-button");
+const inputPages = document.getElementById("input-pages");
+const readCheckbox = document.getElementById("read-checkbox");
+const inputTitle = document.getElementById("input-title");
+const inputAuthor = document.getElementById("input-author");
+const inputColor = document.getElementById("input-color");
 
 //const newBook = document.getElementById("new-book");
 const newBook = document.createElement("div");
@@ -70,15 +75,28 @@ newBook.appendChild( newAuthor );
 okFriend.addEventListener("click", function(){ friendlyDialog.close() }, false);
 newBook.addEventListener("click", function(){ 
     newDialog.showModal()
-    console.log( 'Collect info from user' );
+    //console.log( 'Collect info from user' );
  });
 addButton.addEventListener("click", addButtonClick, false);
 cancelButton.addEventListener("click", cancelButtonClick, false);
+inputPages.addEventListener("beforeinput", function(event){
+    var character = event.data;
+    if( Number(character) && inputPages.value.length < 4 ){
+        return true
+    }else{
+        //console.log('prevent');
+        event.preventDefault();
+    }
+});
 
 function addButtonClick(event){
     // Verify Pages is numeric and over 0, Title and Author have text
-    addBookToLibrary() 
-    clearAndHide();
+    //let pages = parseInt( inputPages.value );
+    if( Number(inputPages.value) && inputPages.value > 0 && inputTitle.value != "" && inputAuthor.value != "" ){
+        addBookToLibrary( readCheckbox.checked, inputTitle.value, parseInt( inputPages.value ), inputAuthor.value, inputColor.value ); 
+        clearAndHide();
+    }
+    
     event.preventDefault();
 }
 function cancelButtonClick(event){
@@ -99,13 +117,13 @@ function logBooks(){
     });
 }
 
-function addBookToLibrary(){
+function addBookToLibrary( read, title, pages, author, color ){
     
-    console.log( 'Adding book to myLibrary.' );
-    myLibrary.push( new Book( true, 'Animorphs', 96, 'K.A. Applegate' ) );
+    //console.log( 'Adding book to myLibrary.' );
+    myLibrary.push( new Book( read, title, pages, author, color ) );
     shelveBooks();
     // logBooks();
-    console.log("Window Dimensions: width: ", window.screen.width, ", height: ", window.screen.height );
+    //console.log("Window Dimensions: width: ", window.screen.width, ", height: ", window.screen.height );
 }
 
 function clearShelf(){
@@ -117,11 +135,10 @@ function clearShelf(){
 }
 
 function shelveBooks(){
-    console.log('Clear Shelves; sort and place books.')
+    //console.log('Clear Shelves; sort and place books.')
     clearShelf();
     myLibrary.forEach((book) => {
         const newerBook = document.createElement("div");
-        //newBook.setAttribute("id","new-book");
         if( book.color === "purple"){
             newerBook.classList.add("book", "purple-book");
         }else if( book.color === "green"){
@@ -133,7 +150,7 @@ function shelveBooks(){
         }else if( book.color === "white"){
             newerBook.classList.add("book", "white-book");
         }else{
-            console.log("Default")
+            //console.log("Default")
             newerBook.classList.add("book", "purple-book");
         }
         // bool
@@ -145,6 +162,18 @@ function shelveBooks(){
             newStatus.classList.add("read-status", "unread");
             newStatus.appendChild( document.createTextNode("Unread") );
         }
+        newStatus.addEventListener("click", function(event){
+            const thisBook = event.target.parentNode.id;
+            let thisBookPosition = parseInt( event.target.parentNode.id.slice(5) ) - 1;
+            //console.log( thisBookPosition );
+            //console.log( thisBook );
+            if ( myLibrary[ thisBookPosition ].read == true){
+                myLibrary[ thisBookPosition ].read = false;
+            }else{
+                myLibrary[ thisBookPosition ].read = true;
+            }
+            shelveBooks();
+        });
         newerBook.appendChild( newStatus );
         // 36
         const newTitle = document.createElement('a');
@@ -156,9 +185,11 @@ function shelveBooks(){
             thisTitle = book.title;
         }
         newTitle.appendChild( document.createTextNode( thisTitle ) );
-        newTitle.href = book.link;
-        newTitle.target = "_blank";
-        newTitle.rel = "noreferrer noopener";
+        if( book.link != "" ){
+            newTitle.href = book.link;
+            newTitle.target = "_blank";
+            newTitle.rel = "noreferrer noopener";
+        }
         newerBook.appendChild( newTitle );
         // 4
         const newPages = document.createElement('span');
@@ -177,7 +208,11 @@ function shelveBooks(){
         newAuthor.appendChild( document.createTextNode( thisAuthor ) );
         newerBook.appendChild( newAuthor );
         
-        console.log("Adding Book to DOM");
+        let newerID =  book.id;
+        newerBook.id = newerID;
+        //console.log( newerBook.id );
+        // newerBook.addEventListener("click", addButtonClick, false);
+        //console.log("Adding Book to DOM");
         shelfDiv.appendChild( newerBook );
     });
     // Add newBook back
@@ -185,12 +220,12 @@ function shelveBooks(){
 }
 
 window.onload = function(){    
-    console.log("Leaving these in for educational value. ")
+    //console.log("Leaving these in for educational value. ")
     defaultData.sortBy('author').forEach((book) =>{
         const BookObject = new Book( book.read, book.title, book.pages, book.author , book.color, book.link )
         myLibrary.push(  BookObject )
         shelfDiv.appendChild( newBook )
     });
-    console.log( myLibrary );
+    //console.log( myLibrary );
     shelveBooks();
 }
