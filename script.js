@@ -8,14 +8,14 @@ let myLibrary = [];
 const defaultData = [
     { read:false, title:"Tale of Two Cities", pages:448, author:"Charles Dickens", color: "green", link:"https://www.gutenberg.org/cache/epub/98/pg98-images.html" },
     { read:false, title:"Farenheit 451", pages:249, author:"Ray Bradbury", color: "red", link:"https://www.thepublicdomain.org/2009/12/31/fahrenheit-451-book-burning-as-done-by-lawyers/" },
-    { read:false, title:"Wizard's First Rule", pages:836, author:"Terry Goodkind", color: "black" },
-    { read:false, title:"The Lion, the Witch, and the Wardrobe", pages:186, author:"C.S Lewis", color: "purple" },
-    { read:false, title:"Prince Caspian", pages:216, author:"C.S Lewis", color: "green" },
-    { read:false, title:"Voyage of the Dawn Treader", pages:216, author:"C.S Lewis", color: "blue" },
-    { read:false, title:"The Silver Chair", pages:217, author:"C.S Lewis", color: "white" },
-    { read:false, title:"The Horse and His Boy", pages:217, author:"C.S Lewis", color: "red" },
-    { read:false, title:"The Magician's Nephew", pages:186, author:"C.S Lewis", color: "purple" },
-    { read:false, title:"The Last Battle", pages:184, author:"C.S Lewis", color:"white" }
+    { read:false, title:"Wizard's First Rule", pages:836, author:"Terry Goodkind", color: "black", link:"https://www.amazon.com/Wizards-First-Rule-Terry-Goodkind-ebook/dp/B08KH4G4R8" },
+    { read:false, title:"The Lion, the Witch, and the Wardrobe", pages:186, author:"C.S Lewis", color: "purple", link:"https://www.amazon.com/Lion-Witch-Wardrobe-Chronicles-Narnia-ebook/dp/B001I45UFC" },
+    { read:false, title:"Prince Caspian", pages:216, author:"C.S Lewis", color: "green", link:"https://www.amazon.com/Prince-Caspian-Return-Narnia-Chronicles-ebook/dp/B001I45UFW" },
+    { read:false, title:"Voyage of the Dawn Treader", pages:216, author:"C.S Lewis", color: "blue", link:"https://www.amazon.com/gp/product/B001I45UEI?notRedirectToSDP=1&ref_=dbs_mng_calw_4&storeType=ebooks" },
+    { read:false, title:"The Silver Chair", pages:217, author:"C.S Lewis", color: "white", link:"https://www.amazon.com/gp/product/B004DNWQ34?notRedirectToSDP=1&ref_=dbs_mng_calw_5&storeType=ebooks" },
+    { read:false, title:"The Horse and His Boy", pages:217, author:"C.S Lewis", color: "red", link:"https://www.amazon.com/gp/product/B001I45UFM?notRedirectToSDP=1&ref_=dbs_mng_calw_2&storeType=ebooks" },
+    { read:false, title:"The Magician's Nephew", pages:186, author:"C.S Lewis", color: "purple", link:"https://www.amazon.com/gp/product/B001I45UF2?notRedirectToSDP=1&ref_=dbs_mng_calw_0&storeType=ebooks" },
+    { read:false, title:"The Last Battle", pages:184, author:"C.S Lewis", color:"white", link:"https://www.amazon.com/gp/product/B001I45UE8?notRedirectToSDP=1&ref_=dbs_mng_calw_6&storeType=ebooks" }
 ]
 
 function Book( read, title, pages, author, color="purple", link="" ){
@@ -43,8 +43,8 @@ const readCheckbox = document.getElementById("read-checkbox");
 const inputTitle = document.getElementById("input-title");
 const inputAuthor = document.getElementById("input-author");
 const inputColor = document.getElementById("input-color");
+const inputLink = document.getElementById("input-link");
 
-//const newBook = document.getElementById("new-book");
 const newBook = document.createElement("div");
 newBook.setAttribute("id","new-book");
 newBook.classList.add("book", "purple-book");
@@ -75,7 +75,6 @@ newBook.appendChild( newAuthor );
 okFriend.addEventListener("click", function(){ friendlyDialog.close() }, false);
 newBook.addEventListener("click", function(){ 
     newDialog.showModal()
-    //console.log( 'Collect info from user' );
  });
 addButton.addEventListener("click", addButtonClick, false);
 cancelButton.addEventListener("click", cancelButtonClick, false);
@@ -84,16 +83,13 @@ inputPages.addEventListener("beforeinput", function(event){
     if( Number(character) && inputPages.value.length < 4 ){
         return true
     }else{
-        //console.log('prevent');
         event.preventDefault();
     }
 });
 
 function addButtonClick(event){
-    // Verify Pages is numeric and over 0, Title and Author have text
-    //let pages = parseInt( inputPages.value );
     if( Number(inputPages.value) && inputPages.value > 0 && inputTitle.value != "" && inputAuthor.value != "" ){
-        addBookToLibrary( readCheckbox.checked, inputTitle.value, parseInt( inputPages.value ), inputAuthor.value, inputColor.value ); 
+        addBookToLibrary( readCheckbox.checked, inputTitle.value, parseInt( inputPages.value ), inputAuthor.value, inputColor.value, inputLink.value ); 
         clearAndHide();
     }
     
@@ -104,10 +100,7 @@ function cancelButtonClick(event){
     event.preventDefault();
 }
 function clearAndHide(){
-    // Clear all Input
-    //document.getElementById('input-pages').value = 0;
     document.getElementById('new-book-form').reset()
-    // Hide Modal
     newDialog.close()
 }
 
@@ -117,13 +110,10 @@ function logBooks(){
     });
 }
 
-function addBookToLibrary( read, title, pages, author, color ){
-    
-    //console.log( 'Adding book to myLibrary.' );
-    myLibrary.push( new Book( read, title, pages, author, color ) );
+function addBookToLibrary( read, title, pages, author, color , link="" ){
+    myLibrary.push( new Book( read, title, pages, author, color, link ) );
     shelveBooks();
     // logBooks();
-    //console.log("Window Dimensions: width: ", window.screen.width, ", height: ", window.screen.height );
 }
 
 function clearShelf(){
@@ -135,8 +125,10 @@ function clearShelf(){
 }
 
 function shelveBooks(){
-    //console.log('Clear Shelves; sort and place books.')
     clearShelf();
+    for( i = 0; i < myLibrary.length; i++ ){
+        myLibrary[i].id = "Book-".concat( i.toString() );
+    }
     myLibrary.forEach((book) => {
         const newerBook = document.createElement("div");
         if( book.color === "purple"){
@@ -150,10 +142,9 @@ function shelveBooks(){
         }else if( book.color === "white"){
             newerBook.classList.add("book", "white-book");
         }else{
-            //console.log("Default")
             newerBook.classList.add("book", "purple-book");
         }
-        // bool
+
         const newStatus = document.createElement("span");
         if( book.read == true ){
             newStatus.classList.add("read-status", "read");
@@ -164,9 +155,7 @@ function shelveBooks(){
         }
         newStatus.addEventListener("click", function(event){
             const thisBook = event.target.parentNode.id;
-            let thisBookPosition = parseInt( event.target.parentNode.id.slice(5) ) - 1;
-            //console.log( thisBookPosition );
-            //console.log( thisBook );
+            let thisBookPosition = parseInt( event.target.parentNode.id.slice(5) ) ;
             if ( myLibrary[ thisBookPosition ].read == true){
                 myLibrary[ thisBookPosition ].read = false;
             }else{
@@ -175,7 +164,7 @@ function shelveBooks(){
             shelveBooks();
         });
         newerBook.appendChild( newStatus );
-        // 36
+
         const newTitle = document.createElement('a');
         let thisTitle = "";
         newTitle.classList.add("bookTitle");
@@ -191,12 +180,7 @@ function shelveBooks(){
             newTitle.rel = "noreferrer noopener";
         }
         newerBook.appendChild( newTitle );
-        // 4
-        const newPages = document.createElement('span');
-        newPages.classList.add("pages");
-        newPages.appendChild( document.createTextNode( book.pages.toString().slice(0,4).concat('p') ) );
-        newerBook.appendChild( newPages );
-        // 16
+
         const newAuthor = document.createElement('span');
         newAuthor.classList.add("author");
         let thisAuthor = "";
@@ -207,12 +191,32 @@ function shelveBooks(){
         }
         newAuthor.appendChild( document.createTextNode( thisAuthor ) );
         newerBook.appendChild( newAuthor );
-        
+
+        const newPages = document.createElement('span');
+        newPages.classList.add("pages");
+        newPages.appendChild( document.createTextNode( book.pages.toString().slice(0,4).concat('p') ) );
+        newerBook.appendChild( newPages );
+
+        const deleteBook = document.createElement('span');
+        deleteBook.classList.add('delete');
+        deleteBook.appendChild( document.createTextNode( 'Remove' ) );
+
+        deleteBook.addEventListener("click", function(event){
+            const thisBook = event.target.parentNode.id;
+            let thisBookPosition = parseInt( thisBook.slice(5) );
+                
+            if( confirm("Sure you want to delete ".concat( myLibrary[thisBookPosition].title,"?" ) ) ){
+                myLibrary.splice( thisBookPosition, 1 );
+                console.log( myLibrary );
+                shelveBooks();    
+            }
+        });
+
+        newerBook.appendChild( deleteBook );
+
         let newerID =  book.id;
         newerBook.id = newerID;
-        //console.log( newerBook.id );
-        // newerBook.addEventListener("click", addButtonClick, false);
-        //console.log("Adding Book to DOM");
+
         shelfDiv.appendChild( newerBook );
     });
     // Add newBook back
@@ -220,12 +224,10 @@ function shelveBooks(){
 }
 
 window.onload = function(){    
-    //console.log("Leaving these in for educational value. ")
     defaultData.sortBy('author').forEach((book) =>{
         const BookObject = new Book( book.read, book.title, book.pages, book.author , book.color, book.link )
         myLibrary.push(  BookObject )
         shelfDiv.appendChild( newBook )
     });
-    //console.log( myLibrary );
     shelveBooks();
 }

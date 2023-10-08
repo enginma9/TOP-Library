@@ -73,7 +73,7 @@ body{
     box-shadow: inset 0 0 2vh black;
     transition: transform 750ms ease-in-out;
 }
-.book:hover{
+.book:hover, .book:focus{
     transform: translateY(-1rem);
 }
 .red-book{
@@ -104,12 +104,13 @@ body{
     font-size: 3vh;
     padding: 2vh;
     min-height: var(--book-title-min-height);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.153);
 }
 .pages{
     background-color: transparent;
     color:antiquewhite;
     font-size: 1.5vh;
-    margin-bottom: 1vh;
+    margin: .5vh;
 }
 #new-book > .pages{
     font-size: 2vh;
@@ -118,6 +119,13 @@ body{
     color:antiquewhite;
     font-size: 1.5vh;
     text-align: center;
+    margin: .5vh;
+}
+.edit, .delete{
+    color:antiquewhite;
+    font-size: 1.5vh;
+    text-align: center;
+    margin: .5vh;
 }
 
 .read-status{
@@ -125,6 +133,7 @@ body{
     padding-left: 1vh;
     padding-right: 1vh;
     font-size: 1.5vh;
+    margin: .5vh;
 }
 .read{
     background-color: green;
@@ -169,6 +178,8 @@ input{
     padding: 5vh;
     box-shadow: inset 0 0 10vh black;
     border: 1px solid rgba(255, 217, 0, 0.077);
-    position: absolute;
-
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0%);
+    
 }
